@@ -1,0 +1,37 @@
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31410.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{43CB1177-2919-499F-B665-F48A63E81AE8}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		Directory.Build.props = Directory.Build.props
+		Directory.Build.targets = Directory.Build.targets
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VSModLauncher", "VSModLauncher\VSModLauncher.csproj", "{7F8E02A9-9B31-472D-9BFF-D24C41B7A9E9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GuiCompositeSettingsEx", "GuiCompositeSettingsEx\GuiCompositeSettingsEx.csproj", "{0938CCA6-4902-4E0D-B7D5-E3167FAA7947}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7F8E02A9-9B31-472D-9BFF-D24C41B7A9E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F8E02A9-9B31-472D-9BFF-D24C41B7A9E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F8E02A9-9B31-472D-9BFF-D24C41B7A9E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F8E02A9-9B31-472D-9BFF-D24C41B7A9E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0938CCA6-4902-4E0D-B7D5-E3167FAA7947}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0938CCA6-4902-4E0D-B7D5-E3167FAA7947}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0938CCA6-4902-4E0D-B7D5-E3167FAA7947}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0938CCA6-4902-4E0D-B7D5-E3167FAA7947}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CAF992D7-AF8E-43D5-AAA1-80E2C54A5FFC}
+	EndGlobalSection
+EndGlobal

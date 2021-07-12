@@ -1,0 +1,6 @@
+*.props text eol=lf
+*.targets text eol=lf
+*.vcproj text eol=lf
+*.cs text eol=lf
+*.json text eol=lf
+*.md text eol=lf

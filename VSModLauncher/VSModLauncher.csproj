@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>netframework4.6.1</TargetFramework>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<CodeModOnly>true</CodeModOnly>
+		<Description>Redirect Logs</Description>
+		<RequiredOnServer>false</RequiredOnServer>
+		<RequiredOnClient>false</RequiredOnClient>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<StartAction>Program</StartAction>
+		<StartProgram>$(VINTAGE_STORY)\Vintagestory.exe</StartProgram>
+		<StartArguments>--addModPath="$(SolutionDir)Output"</StartArguments>
+		<StartWorkingDirectory>$(VINTAGE_STORY)\</StartWorkingDirectory>
+		<DebugType>full</DebugType>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Include="RedirectLogs.cs" />
+	</ItemGroup>
+</Project>
