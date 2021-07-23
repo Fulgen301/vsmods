@@ -77,6 +77,18 @@ SOFTWARE.
 		</Task>
 	</UsingTask>
 
+	<UsingTask TaskName="ModuleInitializerTask" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll" Condition="'$(HasModuleInitializer)' == 'true'">
+		<ParameterGroup>
+			<AssemblyPath Required="true" />
+		</ParameterGroup>
+
+		<Task>
+			<Reference Include="$(VINTAGE_STORY)\Lib\0Harmony.dll" />
+
+			<Code Type="Source" Language="cs" Source="$(SolutionDir)ModuleInitializerTask.cs" />
+		</Task>
+	</UsingTask>
+
 	<PropertyGroup Condition="!('$(CodeModOnly)' == 'true')">
 		<OutputPath>$(SolutionDir)Output\$(ProjectName)</OutputPath>
 		<OutDir>$(OutputPath)\</OutDir>
@@ -145,5 +157,10 @@ SOFTWARE.
 	  OutputPath="$(OutputPath)"
 	>
 		</ModInfoJsonTask>
+	</Target>
+
+	<Target Name="ModuleInitializer" AfterTargets="AfterBuild" Condition="'$(HasModuleInitializer)' == 'true'">
+		<ModuleInitializerTask AssemblyPath="$(TargetPath)">
+		</ModuleInitializerTask>
 	</Target>
 </Project>
