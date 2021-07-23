@@ -87,6 +87,11 @@ SOFTWARE.
 		<OutDir>$(OutputPath)\</OutDir>
 	</PropertyGroup>
 
+	<PropertyGroup>
+		<TargetDir>$(OutDir)</TargetDir>
+		<TargetPath>$(TargetDir)$(TargetFileName)</TargetPath>
+	</PropertyGroup>
+
 	<Target Name="PackageMod" AfterTargets="Build" Condition="!('$(CodeModOnly)' == 'true')">
 		<Exec Command="xcopy /Y /S /H /E /K /C /I $(ProjectDir)assets $(OutDir)assets" />
 		<Exec Command="del $(OutDir)\..\$(TargetName).zip" />
