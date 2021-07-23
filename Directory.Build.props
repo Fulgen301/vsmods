@@ -35,6 +35,7 @@ SOFTWARE.
 
 	<PropertyGroup>
 		<CodeModOnly>false</CodeModOnly>
+		<GenerateModInfo>true</GenerateModInfo>
 		<Authors>Fulgen</Authors>
 		<GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>

@@ -24,7 +24,7 @@ SOFTWARE.
 -->
 
 <Project>
-	<UsingTask TaskName="ModInfoTask" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll" Condition="'$(CodeModOnly)' == 'true'">
+	<UsingTask TaskName="ModInfoTask" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll" Condition="('$(GenerateModInfo)' == 'true') And ('$(CodeModOnly)' == 'true')">
 		<ParameterGroup>
 			<Name Required="true" />
 			<ModID />
@@ -50,7 +50,7 @@ SOFTWARE.
 		</Task>
 	</UsingTask>
 
-	<UsingTask TaskName="ModInfoJsonTask" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll" Condition="!('$(CodeModOnly)' == 'true')">
+	<UsingTask TaskName="ModInfoJsonTask" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll" Condition="('$(GenerateModInfo)' == 'true') And !('$(CodeModOnly)' == 'true')">
 		<ParameterGroup>
 			<Name Required="true" />
 			<ModID />
@@ -111,7 +111,7 @@ SOFTWARE.
 	<Target Name="GenerateModInfo">
 	</Target>
 
-	<Target Name="ModInfoAttribute" AfterTargets="GenerateModInfo" Condition="'$(CodeModOnly)' == 'true'">
+	<Target Name="ModInfoAttribute" AfterTargets="GenerateModInfo" Condition="('$(GenerateModInfo)' == 'true') And ('$(CodeModOnly)' == 'true')">
 		<ModInfoTask
 		  Name="$(Product)"
 		  ModID="$(ModID)"
@@ -128,7 +128,8 @@ SOFTWARE.
 			<Output TaskParameter="AssemblyAttribute" ItemName="AssemblyAttribute" />
 		</ModInfoTask>
 	</Target>
-	<Target Name="ModInfoJson" AfterTargets="GenerateModInfo" Condition="!('$(CodeModOnly)' == 'true')">
+
+	<Target Name="ModInfoJson" AfterTargets="GenerateModInfo" Condition="('$(GenerateModInfo)' == 'true') And !('$(CodeModOnly)' == 'true')">
 		<ModInfoJsonTask
 	  Name="$(Product)"
 	  ModID="$(ModID)"
