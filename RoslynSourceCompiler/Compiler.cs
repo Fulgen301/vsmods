@@ -79,7 +79,7 @@ namespace RoslynSourceCompiler
 		{
 			foreach (ModContainer modContainer in mods)
 			{
-				if (modContainer.RequiresCompilation)
+				if (modContainer.RequiresCompilation && modContainer.Assembly is null)
 				{
 					__instance.GetLogger().Notification("Recompiling with Roslyn");
 
