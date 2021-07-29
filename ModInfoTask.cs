@@ -83,8 +83,17 @@ namespace ModInfoTask
 			}
 
 			if (Side != null) modInfoAttribute.SetMetadata("Side", Side);
-			if (RequiredOnClient != null) modInfoAttribute.SetMetadata("RequiredOnClient", RequiredOnClient);
-			if (RequiredOnServer != null) modInfoAttribute.SetMetadata("RequiredOnServer", RequiredOnServer);
+			if (RequiredOnClient != null)
+			{
+				modInfoAttribute.SetMetadata("RequiredOnClient", RequiredOnClient);
+				modInfoAttribute.SetMetadata("RequiredOnClient_IsLiteral", "true");
+			}
+			if (RequiredOnServer != null)
+			{
+				modInfoAttribute.SetMetadata("RequiredOnServer", RequiredOnClient);
+				modInfoAttribute.SetMetadata("RequiredOnServer_IsLiteral", "true");
+			}
+
 			if (WorldConfig != null) modInfoAttribute.SetMetadata("WorldConfig", WorldConfig);
 
 			AssemblyAttribute = new ITaskItem[] { modInfoAttribute };
