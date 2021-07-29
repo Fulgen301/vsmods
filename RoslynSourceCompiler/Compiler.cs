@@ -81,7 +81,7 @@ namespace RoslynSourceCompiler
 			{
 				if (modContainer.RequiresCompilation)
 				{
-					__instance.GetLogger().Debug("Recompiling {0} with Roslyn", string.Join(", ", modContainer.SourceFiles));
+					__instance.GetLogger().Notification("Recompiling with Roslyn");
 
 					Assembly assembly = Compiler.CompileWithRoslyn(modContainer, modContainer.SourceFiles);
 
@@ -100,7 +100,6 @@ namespace RoslynSourceCompiler
 		[HarmonyPatch("CompileFromFiles")]
 		public static bool CompileFromFiles(ModContainer mod, IEnumerable<string> paths, ref Assembly __result, ModCompilationContext __instance)
 		{
-			mod.Logger.Debug("CompileFromFiles({0})", mod.SourceFiles.FirstOrDefault() ?? "(null)");
 			__result = Compiler.CompileWithRoslyn(mod, paths);
 			return false;
 		}
