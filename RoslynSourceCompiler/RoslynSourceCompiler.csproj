@@ -36,7 +36,7 @@ SOFTWARE.
 		<GenerateModInfo>false</GenerateModInfo>
 		<RepackageDependencies>true</RepackageDependencies>
 		<HasModuleInitializer>true</HasModuleInitializer>
-		<CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
 		<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
 		<GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
 		<NoWarn>NU1605</NoWarn>
