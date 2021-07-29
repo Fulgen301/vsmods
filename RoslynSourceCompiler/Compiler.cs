@@ -53,7 +53,7 @@ namespace ModuleInitializer
 		public static void cctor()
 		{
 			Harmony.DEBUG = true;
-			new Harmony(HarmonyID).PatchAll();
+			new Harmony(HarmonyID).PatchAll(Assembly.GetExecutingAssembly());
 		}
 	}
 }
