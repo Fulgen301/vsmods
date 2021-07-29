@@ -36,10 +36,10 @@ using Vintagestory.API.Common;
 using HarmonyLib;
 
 [assembly: RoslynSourceCompiler.ModInfoForceModuleInitializer(
-	"Roslyn",
-	"roslyn",
+	"RoslynSourceCompiler",
+	"roslynsourcecompiler",
 	Authors = new[] { "Fulgen" },
-	Description = "Replaces the builtin C# compiler with Roslyn to allow source mods with C# > 5.0",
+	Description = "Replaces the builtin C# compiler with Roslyn to allow source mods with C# > 5.0.",
 	RequiredOnClient = false,
 	RequiredOnServer = false,
 	Version = "1.0.0"
@@ -49,7 +49,7 @@ namespace ModuleInitializer
 {
 	public static class ModuleInitializer
 	{
-		private const string HarmonyID = "org.github.fulgen301.roslyncompiler";
+		private const string HarmonyID = "org.github.fulgen301.roslynsourcecompiler";
 		public static void cctor()
 		{
 			Harmony.DEBUG = true;

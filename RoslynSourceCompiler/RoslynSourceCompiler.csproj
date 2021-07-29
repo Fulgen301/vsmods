@@ -27,8 +27,8 @@ SOFTWARE.
 	<PropertyGroup>
 		<TargetFramework>netstandard2.0</TargetFramework>
 		<Product>RoslynSourceCompiler</Product>
-		<Description>Roslyn compiler for source mods.</Description>
-		<Version>0.1.0</Version>
+		<Description>Replaces the builtin C# compiler with Roslyn to allow source mods with C# > 5.0</Description>
+		<Version>1.0.0</Version>
 		<CodeModOnly>true</CodeModOnly>
 		<Side>Universal</Side>
 		<RequiredOnClient>false</RequiredOnClient>
