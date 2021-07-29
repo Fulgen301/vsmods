@@ -8,10 +8,10 @@
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in all
 // copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -43,27 +43,29 @@ namespace ModuleInitializerTask
 
 		public override bool Execute()
 		{
-			AssemblyDefinition assembly = AssemblyDefinition.ReadAssembly(AssemblyPath, new ReaderParameters
+			using (AssemblyDefinition assembly = AssemblyDefinition.ReadAssembly(AssemblyPath, new ReaderParameters
 			{
 				ReadWrite = true
-			});
-
-			foreach (ModuleDefinition module in assembly.Modules)
+			}))
 			{
-				var cctor = new MethodDefinition(".cctor", MethodAttributes.Static | MethodAttributes.SpecialName | MethodAttributes.RTSpecialName, module.ImportReference(typeof(void)));
 
-				TypeDefinition moduleInitializerStaticClass = module.Types.Single(t => t.IsClass && t.Name == TypeName);
-				MethodReference method = moduleInitializerStaticClass.Methods.Single(m => m.IsStatic && m.Name == "cctor");
-				var processor = cctor.Body.GetILProcessor();
+				foreach (ModuleDefinition module in assembly.Modules)
+				{
+					var cctor = new MethodDefinition(".cctor", MethodAttributes.Static | MethodAttributes.SpecialName | MethodAttributes.RTSpecialName, module.ImportReference(typeof(void)));
 
-				Type opCodes = typeof(TypeDefinition).Assembly.GetType("Mono.Cecil.Cil.OpCodes", true);
-				processor.Append(processor.Create(OpCode(opCodes, "Call"), method));
-				processor.Append(processor.Create(OpCode(opCodes, "Ret")));
+					TypeDefinition moduleInitializerStaticClass = module.Types.Single(t => t.IsClass && t.Name == TypeName);
+					MethodReference method = moduleInitializerStaticClass.Methods.Single(m => m.IsStatic && m.Name == "cctor");
+					var processor = cctor.Body.GetILProcessor();
 
-				module.GetType("<Module>").Methods.Add(cctor);
+					Type opCodes = typeof(TypeDefinition).Assembly.GetType("Mono.Cecil.Cil.OpCodes", true);
+					processor.Append(processor.Create(OpCode(opCodes, "Call"), method));
+					processor.Append(processor.Create(OpCode(opCodes, "Ret")));
+
+					module.GetType("<Module>").Methods.Add(cctor);
+				}
+
+				assembly.Write();
 			}
-
-			assembly.Write();
 			return true;
 		}
 
