@@ -94,7 +94,7 @@ SOFTWARE.
 		<OutDir>$(OutputPath)\</OutDir>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(CodeModOnly)' == 'true'">
+	<PropertyGroup Condition="('$(CodeModOnly)' == 'true') And !('$(RepackageDependencies)' == 'true')">
 		<OutputPath>$(SolutionDir)Output</OutputPath>
 		<OutDir>$(OutputPath)\</OutDir>
 	</PropertyGroup>
@@ -111,6 +111,20 @@ SOFTWARE.
 		<Exec Command="C:\PROGRA~1\7-Zip\7z.exe a $(OutDir)..\$(TargetName).zip $(OutDir)*" />
 		<Exec Command="del /S /F /Q $(OutDir)" />
 		<Exec Command="rmdir /S /Q $(OutDir)" />
+	</Target>
+
+	<Target Name="PackageCodeMod" AfterTargets="AfterBuild" Condition="('$(CodeModOnly)' == 'true') And !('$(RepackageDependencies)' == 'true')">
+		<Exec Command="copy $(OutDir)$(TargetName).dll $(OutDir).." />
+		<Exec Command="copy $(OutDir)$(TargetName).pdb $(OutDir).." />
+	</Target>
+
+	<Target Name="ModuleInitializer" AfterTargets="AfterBuild" Condition="'$(HasModuleInitializer)' == 'true'">
+		<ModuleInitializerTask AssemblyPath="$(TargetPath)">
+		</ModuleInitializerTask>
+	</Target>
+
+	<Target Name="PackageILRepack" AfterTargets="ModuleInitializer" Condition="('$(CodeModOnly)' == 'true') And ('$(RepackageDependencies)' == 'true')">
+		<Exec Command="powershell -noprofile -File $(SolutionDir)Scripts\ILRepack.ps1 -TargetName $(TargetFileName)" WorkingDirectory="$(OutDir)" />
 	</Target>
 
 	<PropertyGroup>
@@ -157,10 +171,5 @@ SOFTWARE.
 	  OutputPath="$(OutputPath)"
 	>
 		</ModInfoJsonTask>
-	</Target>
-
-	<Target Name="ModuleInitializer" AfterTargets="AfterBuild" Condition="'$(HasModuleInitializer)' == 'true'">
-		<ModuleInitializerTask AssemblyPath="$(TargetPath)">
-		</ModuleInitializerTask>
 	</Target>
 </Project>

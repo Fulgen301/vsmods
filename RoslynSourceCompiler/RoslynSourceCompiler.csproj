@@ -34,6 +34,7 @@ SOFTWARE.
 		<RequiredOnClient>false</RequiredOnClient>
 		<RequiredOnServer>false</RequiredOnServer>
 		<GenerateModInfo>false</GenerateModInfo>
+		<RepackageDependencies>true</RepackageDependencies>
 		<HasModuleInitializer>true</HasModuleInitializer>
 		<CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
 		<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
