@@ -64,6 +64,7 @@ SOFTWARE.
 			<RequiredOnClient />
 			<RequiredOnServer />
 			<WorldConfig />
+			<ModDependency ParameterType="Microsoft.Build.Framework.ITaskItem[]" />
 
 			<OutputPath Required="true" />
 		</ParameterGroup>
@@ -168,6 +169,7 @@ SOFTWARE.
 	  Side="$(Side)"
 	  RequiredOnClient="$(RequiredOnClient)"
 	  RequiredOnServer="$(RequiredOnServer)"
+	  ModDependency="@(ModDependency)"
 	  OutputPath="$(OutputPath)"
 	>
 		</ModInfoJsonTask>
