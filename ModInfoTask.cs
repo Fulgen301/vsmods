@@ -13,6 +13,8 @@ namespace ModInfoTask
 {
 	public class ModInfoTask : Task
 	{
+		public string AttributeType { get; set; }
+
 		[Required]
 		public string Name { get; set; }
 		public string ModID { get; set; }
@@ -64,7 +66,7 @@ namespace ModInfoTask
 				Side = "Universal";
 			}
 
-			TaskItem modInfoAttribute = new TaskItem("Vintagestory.API.Common.ModInfoAttribute");
+			TaskItem modInfoAttribute = new TaskItem(AttributeType ?? "Vintagestory.API.Common.ModInfoAttribute");
 			modInfoAttribute.SetMetadata("_Parameter1", Name);
 			modInfoAttribute.SetMetadata("_Parameter2", ModID);
 

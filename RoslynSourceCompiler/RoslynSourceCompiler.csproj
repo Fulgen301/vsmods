@@ -33,7 +33,7 @@ SOFTWARE.
 		<Side>Universal</Side>
 		<RequiredOnClient>false</RequiredOnClient>
 		<RequiredOnServer>false</RequiredOnServer>
-		<GenerateModInfo>false</GenerateModInfo>
+		<ModInfoAttributeType>RoslynSourceCompiler.ModInfoForceModuleInitializerAttribute</ModInfoAttributeType>
 		<RepackageDependencies>true</RepackageDependencies>
 		<HasModuleInitializer>true</HasModuleInitializer>
 		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>

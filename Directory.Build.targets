@@ -26,6 +26,7 @@ SOFTWARE.
 <Project>
 	<UsingTask TaskName="ModInfoTask" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll" Condition="('$(GenerateModInfo)' == 'true') And ('$(CodeModOnly)' == 'true')">
 		<ParameterGroup>
+			<AttributeType />
 			<Name Required="true" />
 			<ModID />
 			<Version Required="true" />
@@ -140,6 +141,7 @@ SOFTWARE.
 
 	<Target Name="ModInfoAttribute" AfterTargets="GenerateModInfo" Condition="('$(GenerateModInfo)' == 'true') And ('$(CodeModOnly)' == 'true')">
 		<ModInfoTask
+		  AttributeType="$(ModInfoAttributeType)"
 		  Name="$(Product)"
 		  ModID="$(ModID)"
 		  Version="$(Version)"
