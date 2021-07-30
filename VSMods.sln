@@ -12,6 +12,7 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VSModLauncher", "VSModLauncher\VSModLauncher.csproj", "{7F8E02A9-9B31-472D-9BFF-D24C41B7A9E9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GuiCompositeSettingsEx", "GuiCompositeSettingsEx\GuiCompositeSettingsEx.csproj", "{0938CCA6-4902-4E0D-B7D5-E3167FAA7947}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RoslynSourceCompiler", "RoslynSourceCompiler\RoslynSourceCompiler.csproj", "{2F0E7DCE-DF1B-44E2-8F1D-67F615CD8486}"
 EndProject
 Global
