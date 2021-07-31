@@ -115,11 +115,6 @@ SOFTWARE.
 		<Exec Command="rmdir /S /Q $(OutDir)" />
 	</Target>
 
-	<Target Name="PackageCodeMod" AfterTargets="AfterBuild" Condition="('$(CodeModOnly)' == 'true') And !('$(RepackageDependencies)' == 'true')">
-		<Exec Command="copy $(OutDir)$(TargetName).dll $(OutDir).." />
-		<Exec Command="copy $(OutDir)$(TargetName).pdb $(OutDir).." />
-	</Target>
-
 	<Target Name="ModuleInitializer" AfterTargets="AfterBuild" Condition="'$(HasModuleInitializer)' == 'true'">
 		<ModuleInitializerTask AssemblyPath="$(TargetPath)">
 		</ModuleInitializerTask>
