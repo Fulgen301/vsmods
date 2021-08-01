@@ -45,7 +45,8 @@ namespace ModuleInitializerTask
 		{
 			using (AssemblyDefinition assembly = AssemblyDefinition.ReadAssembly(AssemblyPath, new ReaderParameters
 			{
-				ReadWrite = true
+				ReadWrite = true,
+				ReadSymbols = true
 			}))
 			{
 
@@ -64,7 +65,7 @@ namespace ModuleInitializerTask
 					module.GetType("<Module>").Methods.Add(cctor);
 				}
 
-				assembly.Write();
+				assembly.Write(new WriterParameters() { WriteSymbols = true });
 			}
 			return true;
 		}
