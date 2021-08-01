@@ -41,7 +41,8 @@ namespace DiscordIntegration
 			}
 
 			Debug.WriteLine("New instance");
-			Instance = new DiscordSDKPInvoke(main);
+			//Instance = new DiscordSDKPInvoke(main);
+			Instance = new DiscordSDKCSharp(main);
 		}
 
 		public static void RunCallbacks() => Instance?.Execute();
@@ -49,7 +50,6 @@ namespace DiscordIntegration
 		internal DiscordSDK(object main)
 		{
 			Main = main;
-			GameVersion.DetermineSymbolsForCurrentVersion();
 		}
 
 		public abstract void UpdateActivity();

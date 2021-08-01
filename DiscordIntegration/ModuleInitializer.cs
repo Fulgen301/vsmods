@@ -23,6 +23,7 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -37,38 +38,19 @@ namespace DiscordIntegration
 	{
 		public const string HarmonyID = "org.github.fulgen301.discordintegration";
 
-		[DllImport("kernel32.dll")]
-		internal static extern IntPtr AddDllDirectory([MarshalAs(UnmanagedType.LPWStr)] string NewDirectory);
-
-		[DllImport("kernel32.dll")]
-		internal static extern bool GetDllDirectoryW(uint nBufferLength, [MarshalAs(UnmanagedType.LPWStr)] StringBuilder lpBuffer);
-
-		[DllImport("kernel32.dll")]
-		internal static extern bool SetDllDirectoryW(IntPtr lpPathName);
-
-		[DllImport("kernel32.dll")]
-		internal static extern bool SetDefaultDllDirectories(uint DirectoryFlags);
-
-		[DllImport("kernel32.dll")]
-		internal static extern IntPtr LoadLibraryW([MarshalAs(UnmanagedType.LPWStr)] string NewDirectory);
-
-		internal const uint LOAD_LIBRARY_SEARCH_DEFAULT_DIRS = 0x00001000;
-		internal const uint _MAX_PATH = 255;
-
 		public static void cctor()
 		{
 			Debug.AutoFlush = true;
-			StringBuilder buffer = new((int) _MAX_PATH);
-			GetDllDirectoryW(_MAX_PATH, buffer);
-			SetDllDirectoryW(IntPtr.Zero);
-
 			try
 			{
 				GameVersion.DetermineSymbolsForCurrentVersion();
+#if DEBUG
+				Harmony.DEBUG = true;
+#endif
 				Harmony harmony = new(HarmonyID);
 				harmony.Patch(GameVersion.SymbolsForCurrentVersion.StartMainDialog, prefix: new HarmonyMethod(AccessTools.DeclaredMethod(typeof(ModuleInitializer), nameof(StartMainDialogPatch))));
 				harmony.Patch(AccessTools.DeclaredMethod(typeof(ClientPlatformWindows), "window_RenderFrame"), prefix: new HarmonyMethod(AccessTools.DeclaredMethod(typeof(ModuleInitializer), nameof(window_RenderFrame))));
-				//new Harmony(HarmonyID).PatchAll(Assembly.GetExecutingAssembly());
+				harmony.PatchAll(Assembly.GetExecutingAssembly());
 			}
 			catch (Exception e)
 			{

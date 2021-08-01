@@ -40,11 +40,14 @@ SOFTWARE.
 
 	<ItemGroup>
 		<Compile Include="DiscordSDK.cs" />
+		<Compile Include="DiscordSDKCSharp.cs" />
 		<Compile Include="DiscordSDKPInvoke.cs" />
 		<Compile Include="GameVersion.cs" />
 		<Compile Include="ModInfoForceModuleInitializerAttribute.cs" />
 		<Compile Include="ModSystem.cs" />
 		<Compile Include="ModuleInitializer.cs" />
+
+		<Compile Include="discord_game_sdk\csharp\*.cs" />
 	</ItemGroup>
 
 	<ItemGroup>
