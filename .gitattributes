@@ -4,3 +4,5 @@
 *.cs text eol=lf
 *.json text eol=lf
 *.md text eol=lf
+*.Designer.cs text eol=crlf
+*.resx text eol=crlf
