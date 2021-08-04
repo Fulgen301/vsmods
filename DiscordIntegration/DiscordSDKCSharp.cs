@@ -24,16 +24,14 @@ using System;
 using System.Collections.Generic;
 #if DEBUG
 using System.Diagnostics;
-using System.Reflection;
 #endif
+using System.Reflection;
 using System.Reflection.Emit;
-using System.Text;
 
 using Discord;
 
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
-using System.Threading;
 using HarmonyLib;
 
 #if !NET5
@@ -63,6 +61,8 @@ namespace DiscordIntegration
 
 		[DllImport("libc.so")]
 		private static extern IntPtr dlopen([MarshalAs(UnmanagedType.LPStr)] string filename, int flag);
+		private static IntPtr dlopen(string filename) => dlopen(filename, RTLD_NOW | RTLD_GLOBAL);
+
 		private const int RTLD_NOW = 0x00002;
 		private const int RTLD_GLOBAL = 0x01000;
 
@@ -82,20 +82,50 @@ namespace DiscordIntegration
 			callbacks = new();
 
 			string directory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-			IntPtr result = Environment.OSVersion.Platform switch
+			string dllPath;
+			IntPtr result;
+
+			switch (RuntimeEnv.OS)
 			{
-				PlatformID.Win32NT => LoadLibraryW(Path.Combine(directory, "discord_game_sdk.dll")),
-				PlatformID.Unix => dlopen(Path.Combine(directory, "libdiscord_game_sdk.so"), RTLD_NOW | RTLD_GLOBAL),
-				_ => throw new NotImplementedException()
-			};
+			case OS.Windows:
+				dllPath = Path.Combine(directory, "discord_game_sdk.dll");
+				ExtractFile(dllPath, Environment.Is64BitProcess ? DiscordGameSDK.win64 : DiscordGameSDK.win32);
+				result = LoadLibraryW(dllPath);
+				break;
+
+			case OS.Linux:
+				Ensure64Bit();
+				dllPath = Path.Combine(directory, "discord_game_sdk.so");
+				ExtractFile(dllPath, DiscordGameSDK.linux64);
+				result = dlopen(dllPath);
+				break;
+
+			case OS.Mac:
+				Ensure64Bit();
+				dllPath = Path.Combine(directory, "discord_game_sdk.dylib");
+				ExtractFile(dllPath, DiscordGameSDK.macos_dylib);
+				ExtractFile(Path.Combine(directory, "discord_game_sdk.bundle"), DiscordGameSDK.macos_bundle);
+				result = dlopen(dllPath);
+				break;
+
+			default:
+				throw new NotImplementedException();
+			}
 
 			if (result == IntPtr.Zero)
 			{
 				throw new DllNotFoundException("Failed to load Discord Game SDK");
 			}
 
+			try
+			{
+				discord = new Discord.Discord(CLIENT_ID, (long) CreateFlags.NoRequireDiscord);
+			}
+			catch (ResultException e)
+			{
+				throw new InvalidOperationException("Could not initialize Discord", e);
+			}
 
-			discord = new Discord.Discord(CLIENT_ID, (long) CreateFlags.NoRequireDiscord);
 			LogLevel logLevel =
 #if DEBUG
 			LogLevel.Debug;
@@ -129,6 +159,25 @@ namespace DiscordIntegration
 		~DiscordSDKCSharp()
 		{
 			callbacks = null;
+		}
+
+		private void Ensure64Bit()
+		{
+			if (!Environment.Is64BitProcess)
+			{
+				throw new NotImplementedException("Platform not supported, needs to be a 64bit architecture.");
+			}
+		}
+
+		private void ExtractFile(string path, byte[] bytes)
+		{
+			try
+			{
+				File.WriteAllBytes(path, bytes);
+			}
+			catch (IOException)
+			{
+			}
 		}
 
 		public override void ClearActivity()
@@ -199,7 +248,13 @@ namespace DiscordIntegration
 
 		protected override void Execute()
 		{
-			discord.RunCallbacks();
+			try
+			{
+				discord.RunCallbacks();
+			}
+			catch (ResultException e) when(!ShouldThrowResultException(e.Result))
+			{
+			}
 		}
 
 		protected override void GameExited()
@@ -218,13 +273,20 @@ namespace DiscordIntegration
 		protected override void UpdateServerInfo(string serverName, string externalIP, int port, bool hasPassword, string password)
 		{
 			serverInfo = new(serverName, externalIP, port, hasPassword, password);
-			UpdateActivity();
+		}
+
+		private bool ShouldThrowResultException(Result result)
+		{
+			return result switch
+			{
+				Result.Ok or Result.NotInstalled or Result.NotRunning => false,
+				_ => true
+			};
 		}
 
 		private void OnResult(Result result)
 		{
-			Debug.WriteLine(nameof(OnResult));
-			if (result != Result.Ok)
+			if (ShouldThrowResultException(result))
 			{
 				throw new ResultException(result);
 			}

@@ -21,7 +21,6 @@
 // SOFTWARE.
 
 using System;
-using System.Diagnostics;
 
 using Vintagestory.API.Client;
 
@@ -40,9 +39,14 @@ namespace DiscordIntegration
 				return;
 			}
 
-			Debug.WriteLine("New instance");
-			//Instance = new DiscordSDKPInvoke(main);
-			Instance = new DiscordSDKCSharp(main);
+			try
+			{
+				Instance = new DiscordSDKCSharp(main);
+				Instance.UpdateActivity();
+			}
+			catch (InvalidOperationException)
+			{
+			}
 		}
 
 		public static void RunCallbacks() => Instance?.Execute();
