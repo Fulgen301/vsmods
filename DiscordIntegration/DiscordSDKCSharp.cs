@@ -219,7 +219,7 @@ namespace DiscordIntegration
 				}
 				else
 				{
-					activity.Party = new()
+					/*activity.Party = new()
 					{
 						Size = new()
 						{
@@ -232,10 +232,10 @@ namespace DiscordIntegration
 
 					activity.Secrets = new()
 					{
-						Match = API?.World.Seed.ToString() ?? ""
+						Match = API.World.Seed.ToString()
 					};
 
-					activity.Secrets.Join = activity.Secrets.Match;
+					activity.Secrets.Join = activity.Secrets.Match + "@join";*/
 
 					activity.State = Lang.Get("Playing on {0}", serverInfo.ServerName);
 				}
