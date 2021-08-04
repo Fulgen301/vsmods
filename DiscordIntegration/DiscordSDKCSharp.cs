@@ -304,6 +304,7 @@ namespace DiscordIntegration
 		{
 			return new List<MethodBase>()
 			{
+				AccessTools.DeclaredMethod(typeof(Discord.Discord), nameof(Discord.Discord.SetLogHook)),
 				AccessTools.DeclaredMethod(typeof(ActivityManager), nameof(ActivityManager.UpdateActivity)),
 				AccessTools.DeclaredMethod(typeof(ActivityManager), nameof(ActivityManager.ClearActivity))
 			};
