@@ -143,7 +143,7 @@ namespace DiscordIntegration
 					_ => throw new ArgumentException("level")
 				};
 
-				API?.Logger.Log(logType, message);
+				API?.Logger.Log(logType, "[DiscordIntegration] {0}", message);
 
 #if DEBUG
 				Debug.WriteLine($"[{level.ToString().ToUpperInvariant()}] {message}");
