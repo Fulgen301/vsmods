@@ -22,7 +22,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -83,8 +82,6 @@ namespace DiscordIntegration
 			throw new Exception("Main dialog type not found");
 
 		foundType:
-			Debug.WriteLine(mainDialog.FullName);
-
 			Type screenManagerType = typeof(GuiScreenPublicServers).GetConstructors().Single().GetParameters().First().ParameterType;
 
 			foreach (MethodDefinition method in vintagestoryLib.MainModule.GetType(screenManagerType.FullName).Methods.Where(m => m.HasBody))
