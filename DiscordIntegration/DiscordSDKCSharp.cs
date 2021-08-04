@@ -153,7 +153,6 @@ namespace DiscordIntegration
 			discord.GetActivityManager().RegisterCommand(Assembly.GetEntryAssembly().Location);
 
 			startTime = (uint) DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
-			UpdateActivity();
 		}
 
 		~DiscordSDKCSharp()

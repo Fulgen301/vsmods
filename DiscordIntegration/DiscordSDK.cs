@@ -82,6 +82,7 @@ namespace DiscordIntegration
 			NewGameStarted(API.IsSinglePlayer);
 
 			UpdateServerInfo(serverName, externalIP, port, hasPassword, password);
+			UpdateActivity();
 			//};
 		}
 
@@ -89,6 +90,7 @@ namespace DiscordIntegration
 		{
 			API = null;
 			GameExited();
+			UpdateActivity();
 		}
 
 		protected abstract void Execute();
