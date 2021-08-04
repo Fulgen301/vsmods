@@ -33,6 +33,8 @@ SOFTWARE.
 		<Description>DiscordIntegration</Description>
 		<Version>0.1.0</Version>
 		<CodeModOnly>true</CodeModOnly>
+		<RequiredOnServer>false</RequiredOnServer>
+		<Side>Client</Side>
 		<HasModuleInitializer>true</HasModuleInitializer>
 		<ModInfoAttributeType>DiscordIntegration.ModInfoForceModuleInitializerAttribute</ModInfoAttributeType>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
