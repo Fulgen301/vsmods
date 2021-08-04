@@ -92,7 +92,7 @@ namespace ModInfoTask
 			}
 			if (RequiredOnServer != null)
 			{
-				modInfoAttribute.SetMetadata("RequiredOnServer", RequiredOnClient);
+				modInfoAttribute.SetMetadata("RequiredOnServer", RequiredOnServer);
 				modInfoAttribute.SetMetadata("RequiredOnServer_IsLiteral", "true");
 			}
 
