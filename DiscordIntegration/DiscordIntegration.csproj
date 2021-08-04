@@ -41,6 +41,11 @@ SOFTWARE.
 	</PropertyGroup>
 
 	<ItemGroup>
+		<Compile Include="DiscordGameSDK.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>DiscordGameSDK.resx</DependentUpon>
+		</Compile>
 		<Compile Include="DiscordSDK.cs" />
 		<Compile Include="DiscordSDKCSharp.cs" />
 		<Compile Include="DiscordSDKPInvoke.cs" />
@@ -57,5 +62,12 @@ SOFTWARE.
 			<HintPath>$(VINTAGE_STORY)\Lib\0Harmony.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Update="DiscordGameSDK.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>DiscordGameSDK.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
 	</ItemGroup>
 </Project>
