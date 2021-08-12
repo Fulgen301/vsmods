@@ -33,6 +33,7 @@ SOFTWARE.
 		<Description>Provides various GUI helpers and elements.</Description>
 		<Version>1.0.0</Version>
 		<CodeModOnly>true</CodeModOnly>
+		<GenerateModInfo>false</GenerateModInfo>
 	</PropertyGroup>
 
 	<ItemGroup>
