@@ -45,7 +45,7 @@ namespace GuiExtensions
 
 	internal class GuiElementMenuToggleButton : GuiElementToggleButton
 	{
-		public GuiElementMenuToggleButton(ICoreClientAPI capi, string icon, string text, CairoFont font, Vintagestory.API.Common.Action<bool> OnToggled, ElementBounds bounds, bool toggleable = false) : base(capi, icon, text, font, OnToggled, bounds, toggleable)
+		public GuiElementMenuToggleButton(ICoreClientAPI capi, string icon, string text, CairoFont font, Action<bool> OnToggled, ElementBounds bounds, bool toggleable = false) : base(capi, icon, text, font, OnToggled, bounds, toggleable)
 		{
 		}
 
@@ -82,7 +82,7 @@ namespace GuiExtensions
 		/// <param name="onToggle">The event that happens once the button is toggled.</param>
 		/// <param name="bounds">The bounding box of the button.</param>
 		/// <param name="key">The name of the button for easy access.</param>
-		public static GuiComposer AddMenuToggleButton(this GuiComposer composer, string text, CairoFont font, Vintagestory.API.Common.Action<bool> onToggle, ElementBounds bounds, string key = null)
+		public static GuiComposer AddMenuToggleButton(this GuiComposer composer, string text, CairoFont font, Action<bool> onToggle, ElementBounds bounds, string key = null)
 		{
 			if (!(bool) AccessTools.DeclaredField(typeof(GuiComposer), "composed").GetValue(composer))
 			{
