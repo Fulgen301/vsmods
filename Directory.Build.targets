@@ -91,7 +91,7 @@ SOFTWARE.
 		</Task>
 	</UsingTask>
 
-	<PropertyGroup Condition="!('$(CodeModOnly)' == 'true')">
+	<PropertyGroup>
 		<OutputPath>$(SolutionDir)Output\$(ProjectName)</OutputPath>
 		<OutDir>$(OutputPath)\</OutDir>
 	</PropertyGroup>
