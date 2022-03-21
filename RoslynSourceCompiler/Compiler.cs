@@ -77,7 +77,7 @@ namespace RoslynSourceCompiler
 
 					AccessTools.DeclaredPropertySetter(typeof(ModContainer), "Assembly").Invoke(modContainer, new[] { assembly });
 					modContainer.Error = assembly is not null ? null : ModError.Loading;
-					modContainer.LoadModInfo(null, null, (EnumAppSide) AccessTools.DeclaredField(typeof(ModLoader), "side").GetValue(__instance));
+					modContainer.LoadModInfo(null, null);
 				}
 			}
 		}
