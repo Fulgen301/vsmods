@@ -43,10 +43,17 @@ namespace ModuleInitializerTask
 
 		public override bool Execute()
 		{
+			var assemblyResolver = (IAssemblyResolver) Activator.CreateInstance(typeof(TypeDefinition).Assembly.GetType("Mono.Cecil.DefaultAssemblyResolver"));
+			var addSearchDirectory = assemblyResolver.GetType().GetMethod("AddSearchDirectory", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+
+			var vslibDirectory = Environment.GetEnvironmentVariable("VINTAGE_STORY");
+			addSearchDirectory.Invoke(assemblyResolver, new object[] { vslibDirectory });
+
 			using (AssemblyDefinition assembly = AssemblyDefinition.ReadAssembly(AssemblyPath, new ReaderParameters
 			{
 				ReadWrite = true,
-				ReadSymbols = true
+				ReadSymbols = true,
+				AssemblyResolver = assemblyResolver
 			}))
 			{
 
