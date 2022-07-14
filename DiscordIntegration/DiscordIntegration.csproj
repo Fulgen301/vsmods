@@ -31,7 +31,7 @@ SOFTWARE.
 	<PropertyGroup>
 		<Product>DiscordIntegration</Product>
 		<Description>DiscordIntegration</Description>
-		<Version>0.1.0</Version>
+		<Version>0.2.0</Version>
 		<CodeModOnly>true</CodeModOnly>
 		<RequiredOnServer>false</RequiredOnServer>
 		<Side>Client</Side>
