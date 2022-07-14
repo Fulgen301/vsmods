@@ -36,7 +36,6 @@ SOFTWARE.
 		<RequiredOnServer>false</RequiredOnServer>
 		<Side>Client</Side>
 		<HasModuleInitializer>true</HasModuleInitializer>
-		<ModInfoAttributeType>DiscordIntegration.ModInfoForceModuleInitializerAttribute</ModInfoAttributeType>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	</PropertyGroup>
 
@@ -50,7 +49,6 @@ SOFTWARE.
 		<Compile Include="DiscordSDKCSharp.cs" />
 		<Compile Include="DiscordSDKPInvoke.cs" />
 		<Compile Include="GameVersion.cs" />
-		<Compile Include="ModInfoForceModuleInitializerAttribute.cs" />
 		<Compile Include="ModSystem.cs" />
 		<Compile Include="ModuleInitializer.cs" />
 

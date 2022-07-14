@@ -34,24 +34,21 @@ using Vintagestory.Common;
 using Vintagestory.API.Common;
 
 using HarmonyLib;
-
-namespace ModuleInitializer
-{
-	public static class ModuleInitializer
-	{
-		private const string HarmonyID = "org.github.fulgen301.roslynsourcecompiler";
-		public static void cctor()
-		{
-			Harmony.DEBUG = true;
-			new Harmony(HarmonyID).PatchAll(Assembly.GetExecutingAssembly());
-		}
-	}
-}
+using System.Runtime.CompilerServices;
 
 namespace RoslynSourceCompiler
 {
 	public class DummyModSystem : ModSystem
 	{
+		private const string HarmonyID = "org.github.fulgen301.roslynsourcecompiler";
+
+		[ModuleInitializer]
+		public static void Initialize()
+		{
+			Harmony.DEBUG = true;
+			new Harmony(HarmonyID).PatchAll(Assembly.GetExecutingAssembly());
+		}
+
 		public override bool ShouldLoad(EnumAppSide forSide) => false;
 	}
 

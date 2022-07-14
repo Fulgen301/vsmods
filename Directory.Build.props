@@ -68,4 +68,8 @@ SOFTWARE.
 	<ItemGroup Condition="!('$(CodeModOnly)' == 'true')">
 		<None Include="assets" />
 	</ItemGroup>
+
+	<ItemGroup Condition="'$(HasModuleInitializer)' == 'true'">
+		<Compile Include="$(SolutionDir)Common\ModInfoForceModuleInitializerAttribute.cs" />
+	</ItemGroup>
 </Project>

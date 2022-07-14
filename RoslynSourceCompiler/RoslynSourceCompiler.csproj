@@ -33,16 +33,14 @@ SOFTWARE.
 		<Side>Universal</Side>
 		<RequiredOnClient>false</RequiredOnClient>
 		<RequiredOnServer>false</RequiredOnServer>
-		<ModInfoAttributeType>RoslynSourceCompiler.ModInfoForceModuleInitializerAttribute</ModInfoAttributeType>
-		<RepackageDependencies>true</RepackageDependencies>
 		<HasModuleInitializer>true</HasModuleInitializer>
+		<RepackageDependencies>true</RepackageDependencies>
 		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
 		<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
 		<GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
 		<NoWarn>NU1605</NoWarn>
 	</PropertyGroup>
 	<ItemGroup>
-		<Compile Include="ModInfoForceModuleInitializerAttribute.cs" />
 		<Compile Include="Compiler.cs" />
 	</ItemGroup>
 	<ItemGroup>

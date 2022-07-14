@@ -25,6 +25,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 
@@ -34,11 +35,12 @@ using Vintagestory.Client.NoObf;
 
 namespace DiscordIntegration
 {
-	internal static class ModuleInitializer
+	internal static class Initializer
 	{
 		public const string HarmonyID = "org.github.fulgen301.discordintegration";
 
-		public static void cctor()
+        [ModuleInitializer]
+		public static void Initialize()
 		{
 			Debug.AutoFlush = true;
 			try
@@ -49,7 +51,7 @@ namespace DiscordIntegration
 #endif
 				Harmony harmony = new(HarmonyID);
 				harmony.Patch(GameVersion.SymbolsForCurrentVersion.StartMainDialog, prefix: new HarmonyMethod(AccessTools.DeclaredMethod(typeof(ModuleInitializer), nameof(StartMainDialogPatch))));
-				harmony.Patch(AccessTools.DeclaredMethod(typeof(ClientPlatformWindows), "window_RenderFrame"), prefix: new HarmonyMethod(AccessTools.DeclaredMethod(typeof(ModuleInitializer), nameof(window_RenderFrame))));
+				harmony.Patch(AccessTools.DeclaredMethod(typeof(ClientPlatformWindows), "window_RenderFrame"), prefix: new HarmonyMethod(AccessTools.DeclaredMethod(typeof(Initializer), nameof(window_RenderFrame))));
 				harmony.PatchAll(Assembly.GetExecutingAssembly());
 			}
 			catch (Exception e)

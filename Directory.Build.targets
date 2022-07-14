@@ -2,7 +2,7 @@
 <!--
 MIT License
 
-Copyright(c) 2021 George Tokmaji
+Copyright(c) 2021-2022 George Tokmaji
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -79,17 +79,9 @@ SOFTWARE.
 		</Task>
 	</UsingTask>
 
-	<UsingTask TaskName="ModuleInitializerTask" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll" Condition="'$(HasModuleInitializer)' == 'true'">
-		<ParameterGroup>
-			<AssemblyPath Required="true" />
-		</ParameterGroup>
-
-		<Task>
-			<Reference Include="$(VINTAGE_STORY)\Lib\0Harmony.dll" />
-
-			<Code Type="Source" Language="cs" Source="$(SolutionDir)ModuleInitializerTask.cs" />
-		</Task>
-	</UsingTask>
+	<PropertyGroup Condition="('$(HasModuleInitializer)' == 'true')">
+		<ModInfoAttributeType>VSMods.Common.ModInfoForceModuleInitializerAttribute</ModInfoAttributeType>
+	</PropertyGroup>
 
 	<PropertyGroup>
 		<OutputPath>$(SolutionDir)Output\$(ProjectName)</OutputPath>
@@ -115,12 +107,7 @@ SOFTWARE.
 		<Exec Command="rmdir /S /Q $(OutDir)" />
 	</Target>
 
-	<Target Name="ModuleInitializer" AfterTargets="AfterBuild" Condition="'$(HasModuleInitializer)' == 'true'">
-		<ModuleInitializerTask AssemblyPath="$(TargetPath)">
-		</ModuleInitializerTask>
-	</Target>
-
-	<Target Name="PackageILRepack" AfterTargets="ModuleInitializer" Condition="('$(CodeModOnly)' == 'true') And ('$(RepackageDependencies)' == 'true')">
+	<Target Name="PackageILRepack" AfterTargets="AfterBuild" Condition="('$(CodeModOnly)' == 'true') And ('$(RepackageDependencies)' == 'true')">
 		<Exec Command="powershell -noprofile -File $(SolutionDir)Scripts\ILRepack.ps1 -TargetName $(TargetFileName)" WorkingDirectory="$(OutDir)" />
 	</Target>
 
