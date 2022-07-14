@@ -31,6 +31,7 @@ using System.Text;
 
 using HarmonyLib;
 
+using Vintagestory.Client;
 using Vintagestory.Client.NoObf;
 
 namespace DiscordIntegration
@@ -45,13 +46,10 @@ namespace DiscordIntegration
 			Debug.AutoFlush = true;
 			try
 			{
-				GameVersion.DetermineSymbolsForCurrentVersion();
 #if DEBUG
 				Harmony.DEBUG = true;
 #endif
 				Harmony harmony = new(HarmonyID);
-				harmony.Patch(GameVersion.SymbolsForCurrentVersion.StartMainDialog, prefix: new HarmonyMethod(AccessTools.DeclaredMethod(typeof(ModuleInitializer), nameof(StartMainDialogPatch))));
-				harmony.Patch(AccessTools.DeclaredMethod(typeof(ClientPlatformWindows), "window_RenderFrame"), prefix: new HarmonyMethod(AccessTools.DeclaredMethod(typeof(Initializer), nameof(window_RenderFrame))));
 				harmony.PatchAll(Assembly.GetExecutingAssembly());
 			}
 			catch (Exception e)
@@ -60,13 +58,21 @@ namespace DiscordIntegration
 				throw;
 			}
 		}
+	}
 
-		private static void StartMainDialogPatch(object __instance)
-		{
+    [HarmonyPatch(typeof(ScreenManager), "StartMainMenu")]
+	public static class ScreenManagerPatch
+    {
+		public static void Prefix(ScreenManager __instance)
+        {
 			DiscordSDK.NewInstance(__instance);
 		}
+    }
 
-		private static void window_RenderFrame()
+	[HarmonyPatch(typeof(ClientPlatformWindows), "window_RenderFrame")]
+	public static class ClientPlatformWindowsPatch
+	{
+		public static void Prefix()
 		{
 			DiscordSDK.RunCallbacks();
 		}

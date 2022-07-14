@@ -48,7 +48,6 @@ SOFTWARE.
 		<Compile Include="DiscordSDK.cs" />
 		<Compile Include="DiscordSDKCSharp.cs" />
 		<Compile Include="DiscordSDKPInvoke.cs" />
-		<Compile Include="GameVersion.cs" />
 		<Compile Include="ModSystem.cs" />
 		<Compile Include="ModuleInitializer.cs" />
 

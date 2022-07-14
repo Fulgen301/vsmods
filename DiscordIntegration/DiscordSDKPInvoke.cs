@@ -24,6 +24,7 @@ using System;
 using System.Runtime.InteropServices;
 
 using Vintagestory.API.Client;
+using Vintagestory.Client;
 
 namespace DiscordIntegration
 {
@@ -53,7 +54,7 @@ namespace DiscordIntegration
 		[DllImport("DiscordSDKPInvoke.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ExitGame")]
 		private static extern void ExitGameImpl();
 
-		internal DiscordSDKPInvoke(object main) : base(main)
+		internal DiscordSDKPInvoke(ScreenManager main) : base(main)
 		{
 			logger = new Logger(Log);
 

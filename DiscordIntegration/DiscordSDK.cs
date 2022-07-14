@@ -23,16 +23,18 @@
 using System;
 
 using Vintagestory.API.Client;
+using Vintagestory.Client;
+using Vintagestory.Client.NoObf;
 
 namespace DiscordIntegration
 {
 	public abstract class DiscordSDK
 	{
 		public static DiscordSDK Instance { get; private set; }
-		protected object Main { get; private set; }
+		protected ScreenManager Main { get; private set; }
 		protected ICoreClientAPI API { get; set; }
 
-		public static void NewInstance(object main)
+		public static void NewInstance(ScreenManager main)
 		{
 			if (Instance != null)
 			{
@@ -51,7 +53,7 @@ namespace DiscordIntegration
 
 		public static void RunCallbacks() => Instance?.Execute();
 
-		internal DiscordSDK(object main)
+		internal DiscordSDK(ScreenManager main)
 		{
 			Main = main;
 		}
@@ -66,22 +68,15 @@ namespace DiscordIntegration
 
 			/*API.Event.LevelFinalize += () =>
 			{*/
-			var clientServerInfo = DeclaredField<object>(api.World, "ServerInfo");
-			var symbols = GameVersion.SymbolsForCurrentVersion;
-
-			var serverAddress = DeclaredField<object>(clientServerInfo, symbols.ServerAddress);
+			var clientServerInfo = DeclaredField<ServerInformation>(api.World, "ServerInfo");
+			var connectData = DeclaredField<ServerConnectData>(clientServerInfo, "connectdata");
 
 			// FIXME: MaxClients
-			var serverName = DeclaredField<string>(clientServerInfo, symbols.ServerName);
-			var externalIP = DeclaredField<string>(serverAddress, symbols.HostName);
-			var port = DeclaredField<int>(serverAddress, symbols.Port);
-
-			var hasPassword = DeclaredField<bool>(serverAddress, symbols.HasPassword);
-			var password = hasPassword ? DeclaredField<string>(serverAddress, symbols.Password) : "";
+			var serverName = DeclaredField<string>(clientServerInfo, "ServerName");
 
 			NewGameStarted(API.IsSinglePlayer);
 
-			UpdateServerInfo(serverName, externalIP, port, hasPassword, password);
+			UpdateServerInfo(serverName, connectData.Host, connectData.Port, connectData.IsServePasswordProtected, connectData.ServerPassword);
 			UpdateActivity();
 			//};
 		}

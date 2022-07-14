@@ -38,6 +38,7 @@ using HarmonyLib;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.IO;
+using Vintagestory.Client;
 
 namespace System.Runtime.CompilerServices
 {
@@ -77,7 +78,7 @@ namespace DiscordIntegration
 
 		private static Dictionary<Type, object> callbacks = new();
 
-		public DiscordSDKCSharp(object main) : base(main)
+		public DiscordSDKCSharp(ScreenManager main) : base(main)
 		{
 			callbacks = new();
 
