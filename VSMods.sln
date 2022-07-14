@@ -20,6 +20,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiscordIntegration", "Disco
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FSR1", "FSR1\FSR1.csproj", "{47623E0C-EFE7-4F66-AD4D-8D38D6F82AF2}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorldConfigGUI", "WorldConfigGUI\WorldConfigGUI.csproj", "{2E77BE6A-8074-41D5-A63D-3862326BD54B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,6 +48,10 @@ Global
 		{47623E0C-EFE7-4F66-AD4D-8D38D6F82AF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47623E0C-EFE7-4F66-AD4D-8D38D6F82AF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47623E0C-EFE7-4F66-AD4D-8D38D6F82AF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E77BE6A-8074-41D5-A63D-3862326BD54B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E77BE6A-8074-41D5-A63D-3862326BD54B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E77BE6A-8074-41D5-A63D-3862326BD54B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E77BE6A-8074-41D5-A63D-3862326BD54B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

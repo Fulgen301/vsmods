@@ -1,0 +1,5 @@
+{
+	"dialog-title": "WorldConfig GUI",
+	"command-description": "Welteinstellungen in einer grafischen Oberfläche bearbeiten",
+	"values-updated": "Ok, {0} Welteinstellungen sind aktualisiert worden. Bitte starte den Server neu, damit die Änderungen wirksam werden."
+}
