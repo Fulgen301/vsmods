@@ -31,7 +31,7 @@ SOFTWARE.
 	<PropertyGroup>
 		<Product>GuiCompositeSettingsEx</Product>
 		<Description>Provides an API for mods to add settings dialog panels.</Description>
-		<Version>0.2.0</Version>
+		<Version>1.0.0</Version>
 		<CodeModOnly>true</CodeModOnly>
 	</PropertyGroup>
 

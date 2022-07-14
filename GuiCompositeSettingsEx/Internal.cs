@@ -66,7 +66,7 @@ namespace GuiExtensions
 		/// <param name="key">The name of this dropdown.</param>
 		public static GuiComposer AddMenuDropDown(this GuiComposer composer, string[] values, string[] names, int selectedIndex, SelectionChangedDelegate onSelectionChanged, ElementBounds bounds, string key = null)
 		{
-			if (!(bool) AccessTools.DeclaredField(typeof(GuiComposer), "composed").GetValue(composer))
+			if (!composer.Composed)
 			{
 				composer.AddInteractiveElement(new GuiElementMenuDropDown(composer.Api, values, names, selectedIndex, onSelectionChanged, bounds, CairoFont.WhiteSmallText(), false), key);
 			}
@@ -84,9 +84,8 @@ namespace GuiExtensions
 		/// <param name="key">The name of the button for easy access.</param>
 		public static GuiComposer AddMenuToggleButton(this GuiComposer composer, string text, CairoFont font, Action<bool> onToggle, ElementBounds bounds, string key = null)
 		{
-			if (!(bool) AccessTools.DeclaredField(typeof(GuiComposer), "composed").GetValue(composer))
+			if (!composer.Composed)
 			{
-				composer.AddInteractiveElement(new GuiElementMenuToggleButton(composer.Api, "", text, font, onToggle, bounds, true), key);
 				composer.AddInteractiveElement(new GuiElementMenuToggleButton(composer.Api, "", text, font, onToggle, bounds, true), key);
 			}
 			return composer;
