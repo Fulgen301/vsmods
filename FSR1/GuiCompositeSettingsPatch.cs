@@ -45,25 +45,35 @@ namespace VSMods.FSR1
             composer
                 .AddStaticText(Lang.Get("setting-name-easu"), CairoFont.WhiteSmallishText(), textBounds = textBounds.BelowCopy())
                 .AddHoverText(Lang.Get("setting-hover-easu"), CairoFont.WhiteSmallText(), 250, textBounds.FlatCopy())
-                .AddSwitch(OnEasuChanged, elementBounds = elementBounds.BelowCopy(0, 10), "easuSwitch")
+                .AddSwitch(on => OnValueChanged(composer, "easu", on), elementBounds = elementBounds.BelowCopy(0, 10), "easuSwitch")
 
                 .AddStaticText(Lang.Get("setting-name-rcas"), CairoFont.WhiteSmallishText(), textBounds = textBounds.BelowCopy())
                 .AddHoverText(Lang.Get("setting-hover-rcas"), CairoFont.WhiteSmallText(), 250, textBounds.FlatCopy())
-                .AddSwitch(OnRcasChanged, elementBounds = elementBounds.BelowCopy(0, 10), "rcasSwitch");
+                .AddSwitch(on => OnValueChanged(composer, "rcas", on), elementBounds = elementBounds.BelowCopy(0, 10), "rcasSwitch");
 
-            composer.GetSwitch("easuSwitch").SetValue(ClientSettings.Inst.Bool["easu"]);
-            composer.GetSwitch("rcasSwitch").SetValue(ClientSettings.Inst.Bool["rcas"]);
+            var easu = composer.GetSwitch("easuSwitch");
+            easu.SetValue(ClientSettings.Inst.Bool["easu"]);
+
+            var rcas = composer.GetSwitch("rcasSwitch");
+            rcas.SetValue(ClientSettings.Inst.Bool["rcas"]);
+
+            if (!Initializer.Supported)
+            {
+
+            }
+
             return composer;
         }
 
-        private static void OnEasuChanged(bool value)
+        private static void OnValueChanged(GuiComposer composer, string key, bool value)
         {
-            ClientSettings.Inst.Bool["easu"] = value;
-        }
+            if (!Initializer.Supported)
+            {
+                composer.GetSwitch($"{key}Switch").SetValue(false);
+                return;
+            }
 
-        private static void OnRcasChanged(bool value)
-        {
-            ClientSettings.Inst.Bool["rcas"] = value;
+            ClientSettings.Inst.Bool["easu"] = value;
         }
     }
 

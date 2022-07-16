@@ -42,6 +42,23 @@ namespace VSMods.FSR1
     public static class Initializer
     {
         public const string HarmonyID = "org.github.fulgen301.vsmods.fsr1";
+        public const int RequiredGLMajor = 4;
+        public const int RequiredGLMinor = 2;
+        public const string RequiredGLSLVersion = "420";
+
+        public static bool HighEnoughGLContextVersion
+        {
+            get
+            {
+                var parts = ClientSettings.GlContextVersion.Split('.');
+                return Convert.ToInt32(parts[0]) >= RequiredGLMajor && Convert.ToInt32(parts[1]) >= RequiredGLMinor;
+            }
+        }
+
+        public static bool HighEnoughGLSLVersion => false && ShaderRegistry.IsGLSLVersionSupported(RequiredGLSLVersion);
+
+        public static bool Supported => HighEnoughGLContextVersion;
+
         private static Harmony harmony;
 
         private static readonly Dictionary<string, string> stringTable = new()
@@ -55,6 +72,12 @@ namespace VSMods.FSR1
         [ModuleInitializer]
         public static void Initialize()
         {
+            if (!HighEnoughGLSLVersion)
+            {
+                ClientSettings.Inst.Bool["easu"] = false;
+                ClientSettings.Inst.Bool["rcas"] = false;
+            }
+
             harmony = new(HarmonyID);
             harmony.PatchAll(Assembly.GetExecutingAssembly());
 
