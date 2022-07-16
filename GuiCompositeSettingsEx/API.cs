@@ -87,6 +87,8 @@ namespace GuiExtensions
 
 			new Harmony(ID).UnpatchAll(ID);
 			Patched = false;
+			ExtraMembers.Clear();
+			ExtraPanels.Clear();
 		}
 
 		/// <summary>
