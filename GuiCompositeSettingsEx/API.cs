@@ -115,7 +115,7 @@ namespace GuiExtensions
 		public static void AddPanel(string key, PanelActivatedDelegate @delegate)
 		{
 			EnsurePatched();
-			ExtraPanels.Add(key, @delegate);
+			ExtraPanels[key] = @delegate;
 		}
 
 		/// <summary>
@@ -129,11 +129,11 @@ namespace GuiExtensions
 		public static void AddPanel(this GuiCompositeSettings @this, string key, PanelActivatedDelegate @delegate)
 		{
 			@this.EnsureRegistered();
-			ExtraMembers[@this].Panels.Add(key, new Members.Panel()
+			ExtraMembers[@this].Panels[key] = new Members.Panel()
 			{
 				Bounds = DefaultButtonBounds(),
 				Delegate = @delegate
-			});
+			};
 		}
 
 		/// <summary>
