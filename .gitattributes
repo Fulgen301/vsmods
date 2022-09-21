@@ -6,3 +6,4 @@
 *.md text eol=lf
 *.Designer.cs text eol=crlf
 *.resx text eol=crlf
+*.sln text eol=crlf
