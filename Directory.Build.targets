@@ -109,6 +109,8 @@ SOFTWARE.
 
 	<Target Name="PackageILRepack" AfterTargets="AfterBuild" Condition="('$(CodeModOnly)' == 'true') And ('$(RepackageDependencies)' == 'true')">
 		<Exec Command="powershell -noprofile -File $(SolutionDir)Scripts\ILRepack.ps1 -TargetName $(TargetFileName)" WorkingDirectory="$(OutDir)" />
+		<Exec Command="del /S /F /Q $(OutDir)" />
+		<Exec Command="rmdir /S /Q $(OutDir)" />
 	</Target>
 
 	<PropertyGroup>
