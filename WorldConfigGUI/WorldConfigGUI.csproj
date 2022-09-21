@@ -56,10 +56,6 @@ SOFTWARE.
 			<HintPath>$(VINTAGE_STORY)\Lib\cairo-sharp.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
-		<Reference Include="GuiCompositeSettingsEx">
-			<HintPath>$(SolutionDir)Output\GuiCompositeSettingsEx.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
 		<Reference Include="Newtonsoft.Json">
 			<HintPath>$(VINTAGE_STORY)\Lib\Newtonsoft.Json.dll</HintPath>
 			<Private>false</Private>
@@ -68,5 +64,7 @@ SOFTWARE.
 			<HintPath>$(VINTAGE_STORY)\Lib\protobuf-net.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
+		<ProjectReference Include="..\GuiCompositeSettingsEx\GuiCompositeSettingsEx.csproj">
+		</ProjectReference>
 	</ItemGroup>
 </Project>
