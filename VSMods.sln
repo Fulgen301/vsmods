@@ -24,6 +24,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorldConfigGUI", "WorldConf
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TemperatureScales", "TemperatureScales\TemperatureScales.csproj", "{820B247A-A5C0-4E00-8FEC-458EEA7E03DD}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TemporalTech", "TemporalTech\TemporalTech.csproj", "{78ABD4D6-65E0-4577-933E-5043CE3C4CC6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,6 +60,10 @@ Global
 		{820B247A-A5C0-4E00-8FEC-458EEA7E03DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{820B247A-A5C0-4E00-8FEC-458EEA7E03DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{820B247A-A5C0-4E00-8FEC-458EEA7E03DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78ABD4D6-65E0-4577-933E-5043CE3C4CC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78ABD4D6-65E0-4577-933E-5043CE3C4CC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78ABD4D6-65E0-4577-933E-5043CE3C4CC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78ABD4D6-65E0-4577-933E-5043CE3C4CC6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
