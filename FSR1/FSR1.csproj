@@ -29,7 +29,7 @@ SOFTWARE.
 		<LangVersion>Preview</LangVersion>
 		<Product>FSR1</Product>
 		<Description>FidelityFX Super Resolution 1</Description>
-		<Version>0.1.0</Version>
+		<Version>1.0.0</Version>
 		<CodeModOnly>true</CodeModOnly>
 		<Side>Client</Side>
 		<RequiredOnClient>false</RequiredOnClient>
