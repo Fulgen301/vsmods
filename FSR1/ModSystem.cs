@@ -84,9 +84,13 @@ namespace VSMods.FSR1
             var loadEntry = AccessTools.DeclaredMethod(typeof(TranslationService), "LoadEntry");
             var translationService = (TranslationService) Lang.AvailableLanguages[Lang.DefaultLocale];
 
+            var entryCache = AccessTools.DeclaredField(typeof(TranslationService), "entryCache").GetValue(translationService);
+            var regexCache = AccessTools.DeclaredField(typeof(TranslationService), "regexCache").GetValue(translationService);
+            var wildcardCache = AccessTools.DeclaredField(typeof(TranslationService), "wildcardCache").GetValue(translationService);
+
             foreach (var pair in stringTable)
             {
-                loadEntry.Invoke(translationService, new object[] { pair, GlobalConstants.DefaultDomain });
+                loadEntry.Invoke(translationService, new object[] { entryCache, regexCache, wildcardCache, pair, GlobalConstants.DefaultDomain });
             }
         }
     }

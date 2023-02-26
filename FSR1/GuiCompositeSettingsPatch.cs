@@ -40,27 +40,24 @@ namespace VSMods.FSR1
         {
             ElementBounds elementBounds = composer.GetSlider("resolutionSlider").Bounds;
             int elementKey = composer.CurrentElementKey;
-            ElementBounds textBounds = composer.GetHoverText($"element-{elementKey}").Bounds;
+            ElementBounds textBounds = composer.GetHoverText($"element-{elementKey - 1}").Bounds;
 
             composer
-                .AddStaticText(Lang.Get("setting-name-easu"), CairoFont.WhiteSmallishText(), textBounds = textBounds.BelowCopy())
-                .AddHoverText(Lang.Get("setting-hover-easu"), CairoFont.WhiteSmallText(), 250, textBounds.FlatCopy())
+                .AddStaticText(Lang.Get("setting-name-easu"), CairoFont.WhiteSmallishText(), textBounds = textBounds.BelowCopy(0.0, 7.0, 0.0, 0.0))
+                .AddHoverText(Lang.Get("setting-hover-easu"), CairoFont.WhiteSmallText(), 250, textBounds.FlatCopy().WithFixedHeight(25.0))
                 .AddSwitch(on => OnValueChanged(composer, "easu", on), elementBounds = elementBounds.BelowCopy(0, 10), "easuSwitch")
 
-                .AddStaticText(Lang.Get("setting-name-rcas"), CairoFont.WhiteSmallishText(), textBounds = textBounds.BelowCopy())
-                .AddHoverText(Lang.Get("setting-hover-rcas"), CairoFont.WhiteSmallText(), 250, textBounds.FlatCopy())
+                .AddStaticText(Lang.Get("setting-name-rcas"), CairoFont.WhiteSmallishText(), textBounds = textBounds.BelowCopy(0.0, 7.0, 0.0, 0.0))
+                .AddHoverText(Lang.Get("setting-hover-rcas"), CairoFont.WhiteSmallText(), 250, textBounds.FlatCopy().WithFixedHeight(25.0))
                 .AddSwitch(on => OnValueChanged(composer, "rcas", on), elementBounds = elementBounds.BelowCopy(0, 10), "rcasSwitch");
+
+            composer.GetRichtext($"element-{elementKey}").Bounds = textBounds.BelowCopy(0.0, 5.0);
 
             var easu = composer.GetSwitch("easuSwitch");
             easu.SetValue(ClientSettings.Inst.Bool["easu"]);
 
             var rcas = composer.GetSwitch("rcasSwitch");
             rcas.SetValue(ClientSettings.Inst.Bool["rcas"]);
-
-            if (!Initializer.Supported)
-            {
-
-            }
 
             return composer;
         }
@@ -87,10 +84,10 @@ namespace VSMods.FSR1
             bool changed = false;
             foreach (var instruction in codeInstructions)
             {
-                if (!changed && instruction.OperandIs(665))
+                if (!changed && instruction.OperandIs(690))
                 {
                     changed = true;
-                    yield return new CodeInstruction(OpCodes.Ldc_R8, 665.0 + 80);
+                    yield return new CodeInstruction(OpCodes.Ldc_R8, 690.0 + 80);
                 }
                 else
                 {
