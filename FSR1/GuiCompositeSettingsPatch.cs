@@ -73,7 +73,7 @@ namespace VSMods.FSR1
                 return;
             }
 
-            ClientSettings.Inst.Bool["easu"] = value;
+            ClientSettings.Inst.Bool[key] = value;
         }
     }
 
