@@ -31,7 +31,7 @@ SOFTWARE.
 	<PropertyGroup>
 		<Product>WorldConfigGUI</Product>
 		<Description>Provides a GUI to edit worldconfig values in the settings dialog.</Description>
-		<Version>1.0.0</Version>
+		<Version>1.0.1</Version>
 		<CodeModOnly>false</CodeModOnly>
 	</PropertyGroup>
 
