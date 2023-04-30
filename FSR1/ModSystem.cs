@@ -31,9 +31,12 @@ using System.Threading.Tasks;
 
 using HarmonyLib;
 
+using OpenTK.Graphics.OpenGL;
+
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
+using Vintagestory.Client;
 using Vintagestory.Client.NoObf;
 using Vintagestory.Common;
 
@@ -50,8 +53,10 @@ namespace VSMods.FSR1
         {
             get
             {
-                var parts = ClientSettings.GlContextVersion.Split('.');
-                return Convert.ToInt32(parts[0]) >= RequiredGLMajor && Convert.ToInt32(parts[1]) >= RequiredGLMinor;
+                GL.GetInteger(GetPName.MajorVersion, out int majorVersion);
+                GL.GetInteger(GetPName.MinorVersion, out int minorVersion);
+
+                return majorVersion >= 4 && minorVersion >= 2;
             }
         }
 
