@@ -37,7 +37,7 @@ SOFTWARE.
 
 	<ItemGroup>
 		<ModDependency Include="guicompositesettingsex">
-			<Version>1.0.0</Version>
+			<Version>1.1.0</Version>
 		</ModDependency>
 	</ItemGroup>
 
