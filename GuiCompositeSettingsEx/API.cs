@@ -46,6 +46,18 @@ namespace GuiExtensions
 		public static bool Patched { get; private set; } = false;
 
 		/// <summary>
+		/// The new dialog width, replacing the default value of 900.
+		/// <seealso cref="SettingsDialogWidthAdjustment"/>
+		/// </summary>
+		public static double SettingsDialogWidth => 900.0 + SettingsDialogWidthAdjustment;
+
+		/// <summary>
+		/// By how much the vanilla dialog width is adjusted to account for the "Other" button.
+		/// <seealso cref="SettingsDialogWidth"/>
+		/// </summary>
+		public static double SettingsDialogWidthAdjustment => 80.0;
+
+		/// <summary>
 		/// Callback for panel activation. Build your GUI here.
 		/// Obtain a <see cref="GuiComposer"/> instance via <see cref="ComposerHeaderEx(GuiCompositeSettings, string, string)"/>, then load it with <see cref="LoadComposer(GuiCompositeSettings, GuiComposer)"/>.
 		/// <seealso cref="GuiCompositeSettingsEx"/>
@@ -68,8 +80,16 @@ namespace GuiExtensions
 			var harmony = new Harmony(ID);
 			harmony.Patch(AccessTools.DeclaredMethod(typeof(GuiCompositeSettings), "OpenSettingsMenu"), prefix: new HarmonyMethod(AccessTools.DeclaredMethod(typeof(GuiCompositeSettingsEx), "OpenSettingsMenu")));
 			harmony.Patch(AccessTools.Method(typeof(object), "Finalize"), postfix: new HarmonyMethod(AccessTools.DeclaredMethod(typeof(GuiCompositeSettingsEx), "Destructor")));
-			harmony.Patch(AccessTools.DeclaredMethod(typeof(GuiCompositeSettings), "ComposerHeader"), prefix: new HarmonyMethod(AccessTools.DeclaredMethod(typeof(GuiCompositeSettingsEx), "ComposerHeaderPrefix")), postfix: new HarmonyMethod(AccessTools.DeclaredMethod(typeof(GuiCompositeSettingsEx), "ComposerHeaderPostfix")));
+			harmony.Patch(
+				AccessTools.DeclaredMethod(typeof(GuiCompositeSettings), "ComposerHeader"),
+				prefix: new HarmonyMethod(AccessTools.DeclaredMethod(typeof(GuiCompositeSettingsEx), "ComposerHeaderPrefix")),
+				postfix: new HarmonyMethod(AccessTools.DeclaredMethod(typeof(GuiCompositeSettingsEx), "ComposerHeaderPostfix")),
+				transpiler: new HarmonyMethod(AccessTools.DeclaredMethod(typeof(GuiCompositeSettingsEx), nameof(ComposerHeaderTranspiler)))
+				);
 			harmony.Patch(AccessTools.DeclaredMethod(typeof(GuiCompositeSettings), "updateButtonBounds"), postfix: new HarmonyMethod(AccessTools.DeclaredMethod(typeof(GuiCompositeSettingsEx), "updateButtonBounds")));
+
+			harmony.Patch(AccessTools.DeclaredMethod(typeof(GuiCompositeSettings), "OnGraphicsOptions"), transpiler: new HarmonyMethod(AccessTools.DeclaredMethod(typeof(GuiCompositeSettingsEx), nameof(OnGraphicsOptionsTranspiler))));
+			harmony.Patch(AccessTools.DeclaredMethod(typeof(GuiCompositeSettings), "OnControlOptions"), transpiler: new HarmonyMethod(AccessTools.DeclaredMethod(typeof(GuiCompositeSettingsEx), nameof(OnControlOptionsTranspiler))));
 
 			Patched = true;
 		}

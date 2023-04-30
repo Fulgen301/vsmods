@@ -31,6 +31,7 @@ using Vintagestory.Client.NoObf;
 
 using HarmonyLib;
 using Vintagestory.API.Config;
+using System.Reflection.Emit;
 
 namespace GuiExtensions
 {
@@ -232,6 +233,24 @@ namespace GuiExtensions
 			dropDown.SetList(values, names);
 			*/
 		}
+
+		private static IEnumerable<CodeInstruction> AdjustWidthConstants(IEnumerable<CodeInstruction> instructions, params double[] widths)
+		{
+			foreach (var instruction in instructions)
+			{
+				if (instruction.opcode == OpCodes.Ldc_R8 && widths.Any(width => instruction.OperandIs(width)))
+				{
+					instruction.operand = (double) instruction.operand + SettingsDialogWidthAdjustment;
+				}
+
+				yield return instruction;
+			}
+		}
+
+		private static IEnumerable<CodeInstruction> ComposerHeaderTranspiler(IEnumerable<CodeInstruction> instructions) => AdjustWidthConstants(instructions, 900.0, 850.0);
+
+		private static IEnumerable<CodeInstruction> OnGraphicsOptionsTranspiler(IEnumerable<CodeInstruction> instructions) => AdjustWidthConstants(instructions, 450.0, 650.0);
+		private static IEnumerable<CodeInstruction> OnControlOptionsTranspiler(IEnumerable<CodeInstruction> instructions) => AdjustWidthConstants(instructions, 900.0, 370.0);
 
 		private static void OnMenuDropDownSelectionChanged(GuiCompositeSettings settings, string code, bool on)
 		{

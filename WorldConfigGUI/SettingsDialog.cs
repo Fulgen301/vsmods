@@ -18,7 +18,7 @@ namespace WorldConfigGUI
 	using WorldConfigEntries = Dictionary<string, List<WorldConfigEntry>>;
 	public partial class SystemWorldConfigGui
 	{
-		private double ListWidth { get { return 900.0 - 2.0 * GuiStyle.ElementToDialogPadding - 35.0; }}
+		private double ListWidth => GuiCompositeSettingsEx.SettingsDialogWidth - 2.0 * GuiStyle.ElementToDialogPadding - 35.0;
 		private const double ListHeight = 500;
 
 		private string currentMod = "";
