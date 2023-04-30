@@ -32,7 +32,7 @@ SOFTWARE.
 	<PropertyGroup>
 		<Product>TemperatureScales</Product>
 		<Description>Allows displaying temperatures in Celsius, Fahrenheit and Kelvin.</Description>
-		<Version>1.0.1</Version>
+		<Version>1.0.2</Version>
 		<CodeModOnly>false</CodeModOnly>
 		<Side>Client</Side>
 		<RequiredOnServer>false</RequiredOnServer>
