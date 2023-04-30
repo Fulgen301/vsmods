@@ -64,12 +64,6 @@ namespace VSMods.FSR1
 
         private static void OnValueChanged(GuiComposer composer, string key, bool value)
         {
-            if (!Initializer.Supported)
-            {
-                composer.GetSwitch($"{key}Switch").SetValue(false);
-                return;
-            }
-
             ClientSettings.Inst.Bool[key] = value;
         }
     }
