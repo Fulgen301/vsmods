@@ -101,7 +101,7 @@ SOFTWARE.
 	<Target Name="PackageMod" AfterTargets="Build" Condition="!('$(CodeModOnly)' == 'true')">
 		<Exec Command="xcopy /Y /S /H /E /K /C /I $(ProjectDir)assets $(OutDir)assets" />
 		<Exec Command="del $(OutDir)\..\$(TargetName).zip" />
-		<Exec Command="del $(OutDir)$(TargetName).pdb" />
+		<Exec Command="del $(OutDir)$(TargetName).pdb" Condition="!('$(Configuration)' == 'Debug')" />
 		<ZipDirectory DestinationFile="$(OutDir)..\$(TargetName).zip" SourceDirectory="$(OutDir)" Overwrite="true" />
 		<Exec Command="del /S /F /Q $(OutDir)" />
 		<Exec Command="rmdir /S /Q $(OutDir)" />
