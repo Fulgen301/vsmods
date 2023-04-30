@@ -54,7 +54,7 @@ namespace VSMods.TemperatureScales
 
         public TemperatureScale Scale { get; private set; }
 
-        private readonly Regex temperatureRegex = new(@"(-?\d+(?:\.|,)?\d*)( ?)°([CFK])");
+        private readonly Regex temperatureRegex = new(@"(-?\d+(?:\.|,)?\d*)( ?)(°[CFK]|deg)");
         private CultureInfo cultureInfo;
 
         public override bool ShouldLoad(EnumAppSide forSide) => forSide == EnumAppSide.Client;
@@ -131,9 +131,9 @@ namespace VSMods.TemperatureScales
             {
                 TemperatureScale sourceScale = match.Groups[3].Value.Normalize() switch
                 {
-                    "C" => TemperatureScale.Celsius,
-                    "F" => TemperatureScale.Fahrenheit,
-                    "K" => TemperatureScale.Kelvin,
+                    "°C" or "deg" => TemperatureScale.Celsius,
+                    "°F" => TemperatureScale.Fahrenheit,
+                    "°K" => TemperatureScale.Kelvin,
                     _ => throw new InvalidOperationException()
                 };
 
