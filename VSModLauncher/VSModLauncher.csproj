@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFramework>netframework4.6.1</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
 	</PropertyGroup>
 
 	<PropertyGroup>
@@ -8,6 +8,7 @@
 		<Description>Redirect Logs</Description>
 		<RequiredOnServer>false</RequiredOnServer>
 		<RequiredOnClient>false</RequiredOnClient>
+		<GenerateModInfo>false</GenerateModInfo>
 	</PropertyGroup>
 
 	<PropertyGroup>

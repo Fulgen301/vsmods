@@ -4,6 +4,8 @@ using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Server;
 
+[assembly: ModInfo("RedirectLogs", "redirectlogs", RequiredOnServer = false, RequiredOnClient = false)]
+
 namespace VSModLauncher
 {
 	/// <summary>
